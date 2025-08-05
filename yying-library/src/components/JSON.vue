@@ -11,7 +11,15 @@
       <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
       <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
         <ul>
-          <li v-for="author in authors" :key="author.id">
+          <!-- <li v-for="author in authors" :key="author.id">
+            {{ author.name }} ({{ author.birthYear }})
+          </li> -->
+          <li
+            v-for="author in authors"
+            :key="author.id"
+            :class="{ highlight: selectedAuthorId === author.id }"
+            @click="selectedAuthorId = author.id"
+          >
             {{ author.name }} ({{ author.birthYear }})
           </li>
         </ul>
@@ -113,6 +121,7 @@ import { ref, computed } from "vue"
 import authors from "../assets/json/authors.json"
 import bookstores from "../assets/json/bookstores.json"
 const showMessage = ref(false)
+const selectedAuthorId = ref(null)
 
 // Activity 2: Get authors born after 1850
 const modernAuthors = computed(() =>
